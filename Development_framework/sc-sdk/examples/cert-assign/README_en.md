@@ -41,7 +41,7 @@ This demo is used to issue an X509 certificate to users. It creates a root certi
 
 4. Replace the `manifest.txt` file in the `./TA/` directory with the `manifest.txt` file used for applying for a developer certificate.
 
-5. Install the TA demo. When compiling the TA, you need to statically link the OpenSSL encryption and decryption library applicable to the TEE. After `kunpeng-sc-devel-1.1.0` is installed, the OpenSSL encryption and decryption library applicable to the TEE is installed to `/usr/local/kunpeng-sc-devel/example/cert-assign/lib/libcrypto.a`. For reference, see **Compiling and Generating the libcrypto.a File for TEE**.
+5. Install the TA demo. When compiling the TA, you need to statically link the OpenSSL encryption and decryption library applicable to the TEE. After `kunpeng-sc-devel-1.1.0` is installed, the OpenSSL encryption and decryption library applicable to the TEE is installed to `/usr/local/kunpeng-sc-devel/examples/cert-assign/lib/libcrypto.a`. For reference, see **Compiling and Generating the libcrypto.a File for TEE**.
 
    ```shell
    cd ./TA/
@@ -112,15 +112,13 @@ patch -p1 < /path/to/openssl_for_tee.patch
    -DOPENSSL_NO_UI_CONSOLE \
    -DOPENSSL_NO_SECURE_MEMORY -DOPENSSL_NO_STDIO \
    -DOPENSSL_NO_STATIC_ENGINE -D__STDC_NO_ATOMICS__ \
-   -O -w -fno-short-enums -fno-omit-frame-pointer \
-   -fstack-protector-strong -Wextra \
+   -O -w -fno-short-enums -fno-omit-frame-pointer -Wextra \
    -nostdinc -nodefaultlibs -march=armv8-a -Os -Wno-main -fPIC \
    -Wno-error=unused-parameter -Wno-error=unused-but-set-variable \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/aarch64 \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/aarch64/bits \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/generic \
-   -I/usr/local/kunpeng-sc-devel/source/liboundscheck/include \
    -I/usr/include/itrustee_sdk/TA \
    -I/usr/include/itrustee_sdk/TA/huawei_ext"
 make -j 4

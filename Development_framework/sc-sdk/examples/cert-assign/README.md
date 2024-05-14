@@ -41,7 +41,7 @@ cert-assign demo是使用鲲鹏机密计算特性开发的证书签发系统的�
 
 4. 将 `./TA/` 目录下的 `manifest.txt` 文件替换成申请开发者证书时使用的 `manifest.txt` 文件
 
-5. 安装TA demo，编译TA时需要静态链接适用于TEE的OpenSSL加解密库，安装`kunpeng-sc-devel-1.1.0`后会将适用于TEE的OpenSSL加解密库安装到 `/usr/local/kunpeng-sc-devel/example/cert-assign/lib/libcrypto.a` ，也可以参考 **编译生成适用于TEE的libcrypto.a** 章节自行编译。
+5. 安装TA demo，编译TA时需要静态链接适用于TEE的OpenSSL加解密库，安装`kunpeng-sc-devel-1.1.0`后会将适用于TEE的OpenSSL加解密库安装到 `/usr/local/kunpeng-sc-devel/examples/cert-assign/lib/libcrypto.a` ，也可以参考 **编译生成适用于TEE的libcrypto.a** 章节自行编译。
 
    ```shell
    cd ./TA/
@@ -112,15 +112,13 @@ patch -p1 < /path/to/openssl_for_tee.patch
    -DOPENSSL_NO_UI_CONSOLE \
    -DOPENSSL_NO_SECURE_MEMORY -DOPENSSL_NO_STDIO \
    -DOPENSSL_NO_STATIC_ENGINE -D__STDC_NO_ATOMICS__ \
-   -O -w -fno-short-enums -fno-omit-frame-pointer \
-   -fstack-protector-strong -Wextra \
+   -O -w -fno-short-enums -fno-omit-frame-pointer -Wextra \
    -nostdinc -nodefaultlibs -march=armv8-a -Os -Wno-main -fPIC \
    -Wno-error=unused-parameter -Wno-error=unused-but-set-variable \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/aarch64 \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/aarch64/bits \
    -I/usr/include/itrustee_sdk/thirdparty/musl/libc/arch/generic \
-   -I/usr/local/kunpeng-sc-devel/source/liboundscheck/include \
    -I/usr/include/itrustee_sdk/TA \
    -I/usr/include/itrustee_sdk/TA/huawei_ext"
 make -j 4
